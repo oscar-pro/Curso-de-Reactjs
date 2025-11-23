@@ -1,7 +1,7 @@
 # 📧 Nuevo Correo: URGENTE - Arreglar el Tablero de Tareas
 
-**De:** Jefe de Proyecto
-**Para:** Nuevo Desarrollador (Tú)
+**De:** Jefe 
+**Para:** Nuevo Desarrollador Oscar David Alfaro Rebolledo
 **Asunto:** El becario anterior rompió todo... ayuda.
 
 Hola,

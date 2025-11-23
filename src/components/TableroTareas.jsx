@@ -1,59 +1,55 @@
 import React, { useState } from 'react';
-import { FormularioTarea } from './FormularioTarea';
-import { TarjetaTarea } from './TarjetaTarea';
+import { FormularioTarea } from './FormularioTarea.jsx';
+import { TarjetaTarea } from './TarjetaTarea.jsx';
 
 export function TableroTareas() {
-    const [tareas, setTareas] = useState([
-        { id: 1, texto: 'Arreglar el servidor', completada: false, fecha: new Date() },
-        { id: 2, texto: 'Comprar café', completada: true, fecha: new Date() },
-    ]);
-
-    const agregarTarea = (texto) => {
+    const FechaActual = new Date();
+    const DiaActual = FechaActual.getDate();
+    const MesActual = FechaActual.getMonth() + 1;
+    const AnioActual = FechaActual.getFullYear();
+    const fechaFormateada = `${DiaActual}/${MesActual}/${AnioActual}`;
+    const completada = false;
+    const [tareas, setTareas] = useState([]);
+        const agregarTarea = (texto) => {
         const nuevaTarea = {
-            id: Math.random(), // (Esto es aceptable por ahora)
+            id: tareas.length + 1,
             texto: texto,
-            completada: false,
-            fecha: new Date()
+            completada: completada,
+            fecha: fechaFormateada
         };
-
-        // BUG: Esto es una MUTACIÓN DIRECTA del estado. React no se entera de que cambió.
-        // NUNCA hagas .push() directamente al estado.
-        // Tienes que usar setTareas([...tareas, nuevaTarea])
-        tareas.push(nuevaTarea);
+        setTareas([...tareas, nuevaTarea]);
     };
-
     const toggleCompletada = (id) => {
-        // FIXME: Aquí intentamos actualizar una tarea, pero la lógica es confusa.
-        // Queremos crear un NUEVO array con la tarea modificada.
-        const nuevasTareas = tareas.map(t => {
+        const t = tareas.find(tarea => tarea.id === id);
+        const arrayTareas = [...tareas];
+        const index = arrayTareas.findIndex(tarea => tarea.id === id);
+        const TableroTareas = arrayTareas[index];   
+        TableroTareas.completada = !TableroTareas.completada;
+        const nuevasTareas = arrayTareas.map(t => {
             if (t.id === id) {
-                t.completada = !t.completada; // <-- Otra mutación directa :(
+                t.completada = !t.completada;
                 return t;
             }
             return t;
         });
         setTareas(nuevasTareas);
     };
-
     const eliminarTarea = (id) => {
-        // TODO: Implementar la lógica para eliminar una tarea usando .filter()
-        alert("Funcionalidad de eliminar aún no implementada para el ID: " + id);
+        const nuevasTareas = tareas.filter(tarea => tarea.id !== id);
+        setTareas(nuevasTareas);
     };
-
+    
     return (
-        <div style={{ maxWidth: '500px', margin: '0 auto', fontFamily: 'Arial' }}>
+        <div className="TableroTareas">
             <h1>📋 Tablero de Equipo</h1>
-
             <FormularioTarea alAgregar={agregarTarea} />
-
             <div>
                 {tareas.map((tarea) => (
-                    // BUG: React se queja en la consola sobre "Missing key prop".
-                    // Necesitamos agregar key={tarea.id} aquí.
                     <TarjetaTarea
                         tarea={tarea}
                         alCompletar={toggleCompletada}
                         alEliminar={eliminarTarea}
+                        key={tarea.id}
                     />
                 ))}
             </div>
