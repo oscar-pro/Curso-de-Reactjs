@@ -7,7 +7,7 @@ export function FormularioTarea({ alAgregar }) {
     const month = fecha.getMonth() + 1;
     const year = fecha.getFullYear();
     const fechaFormateada = `${day}/${month}/${year}`;
-    
+
     const completada = false;
 
     const [texto, setTexto] = useState('');
@@ -20,7 +20,7 @@ export function FormularioTarea({ alAgregar }) {
 
     return (
         <form onSubmit={manejarEnvio}>
-            <input type="text" value={texto} onChange={(evento) => setTexto(evento.target.value)} />
+            <input placeholder='Tareas pendientes...' maxLength={65} type="text" value={texto} onChange={(evento) => setTexto(evento.target.value)} />
             <button type="submit">Agregar</button>
         </form>
     );

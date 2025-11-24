@@ -16,13 +16,14 @@ export function TarjetaTarea({ tarea, alEliminar }) {
 
 
     const id = tarea.id;
+    console.log(tarea.id)
     const fecha = tarea.fecha;
 
 
     const manejarCompletar = () => {
         setComplet(!Complet)
-    }
 
+    }
 
     const manejarEliminar = (evento) => {
         evento.preventDefault();
@@ -40,8 +41,8 @@ export function TarjetaTarea({ tarea, alEliminar }) {
             alignItems: 'center'
         }}>
             <div className='ContentTareasPendientes'>
-                
-                <span style={{ textDecoration: Complet ? 'line-through' : 'none', color : Complet ? 'red': 'blue'}}>  {/* lo mimso  si es true el estilo cambia y se subraya si el false se queda normal */}
+
+                <span style={{ textDecoration: Complet ? 'line-through' : 'none', color: Complet ? 'red' : 'blue' }}>  {/* lo mimso  si es true el estilo cambia y se subraya si el false se queda normal */}
                     {/* falta Eliminar el otro input  */}
                     {tarea.texto}
                 </span>
@@ -54,7 +55,7 @@ export function TarjetaTarea({ tarea, alEliminar }) {
 
 
 
-            <div>
+            <div className=' Buttons'>
                 <button onClick={manejarCompletar}>
                     {completed}
                 </button>
