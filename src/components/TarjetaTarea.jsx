@@ -1,7 +1,13 @@
 import React from 'react';
 import { useState } from 'react';
+import { useEffect } from "react";
 
 export function TarjetaTarea({ tarea, alEliminar }) {
+
+    useEffect(() => {
+        console.log(`Tareas pendientes: ${tarea.id} fecha: ${fecha} `);
+    }, []);
+
     const fechaFormateada = (fecha) => {
         const fechaFormateada = new Date(fecha);
         const dia = fechaFormateada.getDate();
@@ -16,7 +22,6 @@ export function TarjetaTarea({ tarea, alEliminar }) {
 
 
     const id = tarea.id;
-    console.log(tarea.id)
     const fecha = tarea.fecha;
 
 

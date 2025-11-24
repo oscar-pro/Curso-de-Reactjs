@@ -25,4 +25,4 @@ export function FormularioTarea({ alAgregar }) {
         </form>
     );
 }
-   
+

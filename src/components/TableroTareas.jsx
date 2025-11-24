@@ -10,11 +10,11 @@ export function TableroTareas() {
     const AnioActual = FechaActual.getFullYear();
     const fechaFormateada = `${DiaActual}/${MesActual}/${AnioActual}`;
     const completada = false;
-    
+
     const [tareas, setTareas] = useState([]);
-        const agregarTarea = (texto) => {
+    const agregarTarea = (texto) => {
         const nuevaTarea = {
-            id: tareas.length +1,
+            id: crypto.randomUUID(),
             texto: texto,
             completada: completada,
             fecha: fechaFormateada
