@@ -7,18 +7,16 @@ export function FormularioTarea({ alAgregar }) {
     const month = fecha.getMonth() + 1;
     const year = fecha.getFullYear();
     const fechaFormateada = `${day}/${month}/${year}`;
+    
     const completada = false;
+
     const [texto, setTexto] = useState('');
-
-
 
     const manejarEnvio = (evento) => {
         evento.preventDefault();
         alAgregar(texto, fechaFormateada, completada);
         setTexto('');
     };
-
-    // en este hay un error 
 
     return (
         <form onSubmit={manejarEnvio}>
